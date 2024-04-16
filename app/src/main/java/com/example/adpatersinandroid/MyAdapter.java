@@ -7,16 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.security.PrivateKey;
-
-public class MyAdapter extends BaseAdapter {
+public class MyAdapter  extends BaseAdapter {
 
     private Context context;
     private String[] items;
 
+
     public MyAdapter(Context context, String[] items) {
-        this.context=context;
-        this.items=items;
+        this.context = context;
+        this.items = items;
     }
 
     @Override
@@ -25,33 +24,32 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
-        return items[i];
+    public Object getItem(int position) {
+        return items[position];
     }
 
     @Override
-    public long getItemId(int i) {
-        return i;
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
 
-        if(view==null){
-            view=LayoutInflater.from(context).inflate(R.layout.my_list_view,viewGroup,false);
-
-            viewHolder=new ViewHolder();
-            viewHolder.textView=view.findViewById(R.id.textView);
-            view.setTag(viewHolder);
+        if(convertView==null){
+             convertView= LayoutInflater.from(context).inflate(R.layout.my_list_view,parent,
+                     false);
+             viewHolder=new ViewHolder();
+             viewHolder.textView=convertView.findViewById(R.id.textView);
+             convertView.setTag(viewHolder);
 
         }else{
-            viewHolder=(ViewHolder)view.getTag();
+            viewHolder=(ViewHolder) convertView.getTag();
         }
 
-        viewHolder.textView.setText(items[i]);
-
-        return view;
+        viewHolder.textView.setText(items[position]);
+        return convertView;
     }
 
     static class ViewHolder{
